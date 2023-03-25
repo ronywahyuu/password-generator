@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import StrengthBar from "./StrengthBar";
-import { IState } from "../../types/index";
+import { IState } from "../../types";
 
 type Props = {
   length: number;
@@ -18,37 +18,15 @@ const Condition: React.FC<Props> = ({
   condition,
   setCondition,
 }) => {
-  // const [condition, setCondition] = useState<IState>({
-  //   uppercase: false,
-  //   lowercase: false,
-  //   numbers: false,
-  //   symbols: false,
-  // });
-
-  const [strength, setStrength] = useState(0);
-  // console.log(uppercase);
 
   const { uppercase, lowercase, numbers, symbols } = condition;
 
-  // console.log(condition);
-  const isAtLeastOneChecked = () => {
-    if ((uppercase || lowercase || numbers || symbols) && length > 0) {
-      return true;
-    }
-    return false;
-  };
-
-  // console.log(isAtLeastOneChecked());
+  const isAtLeastOneChecked = () => (uppercase || lowercase || numbers || symbols) && length > 0;
 
   const handleGeneratePassword = () => {
-    if (isAtLeastOneChecked()) {
-      generatePassword();
-    }
-    console.log("generate");
+    if (isAtLeastOneChecked()) generatePassword();
   };
 
-  // console.log(length);
-  // console.log(uppercase || lowercase || numbers || symbols);
   return (
     <div className="w-full  bg-[#24232A] ">
       {/*<input type="text" className="border w-full  p-2 border-none focus:outline-none text-slate-400 font-bold rounded-sm" value="P4s5W0Rd!"/>*/}

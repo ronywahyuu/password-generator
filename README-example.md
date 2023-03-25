@@ -22,3 +22,5 @@ App will be running on http://localhost:3000
 - Tailwind CSS
 
 ## Screenshots
+![Password Generator Screenshot](./public/images/password-generator.png "Password Generator")
+

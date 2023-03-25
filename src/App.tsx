@@ -1,12 +1,15 @@
 import DisplayPassword from "./components/Display";
 import Condition from "./components/Condition";
-import { useState } from "react";
-import { IState } from "../types/index";
+import React, {useState} from "react";
+import {IState} from "../types";
+import Alert from "./components/Alert";
+
 // import './App.css'
 
 function App() {
   const [password, setPassword] = useState("");
   const [length, setLength] = useState(0);
+  const [isCopied, setIsCopied] = useState(false);
   const [condition, setCondition] = useState<IState>({
     uppercase: false,
     lowercase: false,
@@ -44,28 +47,32 @@ function App() {
     let generatedPassword = "";
     for (let i = 0; i < passwordLength; i++) {
       generatedPassword += password.charAt(
-        Math.floor(Math.random() * password.length)
+          Math.floor(Math.random() * password.length)
       );
     }
     setPassword(generatedPassword);
   };
 
-  // console.log(`password: ${password}`);
-  console.log(condition.uppercase);
+  console.log(`isCopied: ${isCopied}`);
   return (
-    <main className="max-w-lg  mx-auto flex  flex-col h-screen justify-center items-center px-5 my-5 md:my-0">
-      <h1 className="text-center text-xl   text-slate-500 font-bold">
-        Password Generator
-      </h1>
-      <DisplayPassword password={password} />
-      <Condition
-        length={length}
-        setLength={setLength}
-        condition={condition}
-        setCondition={setCondition}
-        generatePassword={generatePassword}
-      />
-    </main>
+      <main className="max-w-lg  mx-auto flex  flex-col h-screen justify-center items-center px-5 my-5 md:my-0">
+        <h1 className="text-center text-xl md:text-3xl   text-slate-500 font-bold">
+          Password Generator
+        </h1>
+        <DisplayPassword
+            password={password}
+            setIsCopied={setIsCopied}
+        />
+        <Condition
+            length={length}
+            setLength={setLength}
+            condition={condition}
+            setCondition={setCondition}
+            generatePassword={generatePassword}
+        />
+        {isCopied && <Alert message="Password Copied!" type="success" show={isCopied}/>}
+
+      </main>
   );
 }
 
